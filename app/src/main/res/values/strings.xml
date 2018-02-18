@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Калькулятор баллов ЕГЭ</string>
+    <string name="getUniver">Подобрать вуз</string>
 </resources>
