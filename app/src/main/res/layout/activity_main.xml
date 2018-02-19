@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/activityMain"
     android:background="@color/backgroun"
     tools:context="com.ilatis.egecalc.MainActivity">
 
@@ -19,7 +20,7 @@
 
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/startSearch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="@string/getUniver"
