@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Калькулятор баллов ЕГЭ</string>
     <string name="getUniver">Подобрать вуз</string>
+    <string name="Drus">Русский</string>
+    <string name="Dmath">Математика</string>
+    <string name="Dobsh">Обществознание</string>
+    <string name="Dfiz">Физика</string>
+    <string name="Dist">История</string>
+    <string name="Dbio">Биология</string>
+    <string name="Dchem">Химия</string>
+    <string name="Dlang">Иностранный язык</string>
+    <string name="Dikt">Информатика и ИКТ</string>
+    <string name="Dgeo">География</string>
+    <string name="Dlit">Литература</string>
 </resources>

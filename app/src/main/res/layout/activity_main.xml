@@ -6,25 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroun"
     tools:context="com.ilatis.egecalc.MainActivity">
 
-    <include layout="@layout/content_main"
-        android:layout_width="match_parent"
+    <include
+        layout="@layout/non_list"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"/>
 
 
     <Button
         android:id="@+id/start"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="@string/getUniver"
         android:background="@color/bottomsColor"
-        android:gravity="center_horizontal"
+        android:textColor="@color/bottomsTextColor"
+        android:gravity="center_horizontal|center"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:layout_weight="1"/>
+        android:layout_weight="0.150"
+        android:focusable="true" />
 </LinearLayout>
