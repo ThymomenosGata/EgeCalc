@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.DisciplineHelper;
 import com.ilatis.egecalc.Fragments.FragmentOfBalls;
+import com.ilatis.egecalc.ListAdapters.EgeAdapter;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
 import com.ilatis.egecalc.Parser.HelperClasses.ClassForUniversities;
 import com.ilatis.egecalc.Parser.JsoupParser;

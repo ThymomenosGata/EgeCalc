@@ -17,4 +17,5 @@
     <string name="info1">Вступительные предметы</string>
     <string name="info2">Проходной балл</string>
     <string name="info3">Средняя зарплата</string>
+    <string name="info4">Введите ваши баллы:</string>
 </resources>

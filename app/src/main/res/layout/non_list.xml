@@ -7,6 +7,16 @@
     android:layout_gravity="center_horizontal"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textViewInfo4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:textAlignment="center"
+        android:textSize="10pt"
+        android:textColor="@color/bottomsTextColor"
+        android:text="@string/info4" />
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
