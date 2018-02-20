@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
             new MyTask().execute();
             System.out.println("bb");
         }
-        else{
+        else
+            if(c.moveToFirst() && cc.moveToFirst()){
 
             int univerIndex = c.getColumnIndex(DATAHelper.COLUMN_UNIVERSITY);
             int specifIndex = c.getColumnIndex(DATAHelper.COLUMN_SPECIALITY);
@@ -125,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 arrayList.add(new ListForEge(c.getString(univerIndex), disp,
                         c.getString(specifIndex),c.getInt(ballsIndex), c.getInt(moneyIndex)));
             }while (c.moveToNext() && cc.moveToNext());
-
-            System.out.println(arrayList.get(0).getUnivers());
         }
         c.close();
         cc.close();
