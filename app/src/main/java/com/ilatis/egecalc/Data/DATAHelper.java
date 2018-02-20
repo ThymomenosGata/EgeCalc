@@ -17,7 +17,6 @@ public class DATAHelper extends SQLiteOpenHelper {
     public final static String _ID = BaseColumns._ID;
     public final static String COLUMN_UNIVERSITY = "university";
     public final static String COLUMN_SPECIALITY = "speciality";
-    public final static String COLUMN_DISCIPLINE = "discipline";
     public final static String COLUMN_BALL = "ball";
     public final static String COLUMN_MONEY = "money";
 

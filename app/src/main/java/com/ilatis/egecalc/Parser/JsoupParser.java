@@ -21,7 +21,7 @@ public class JsoupParser {
     static final String URL = "http://postyplenie.ru/calculator.php?Vuz=all&obzestvoznanie=100" +
             "&russkiy=100&informatika=100&biologiya=100&geografiya=100&ximiya=100&fizika=100" +
             "&literatura=100&history=100&matematika=100&lang=100&Submit.x=0&Submit.y=0";
-    public static void Parse() throws IOException {
+    public static ArrayList<ClassForUniversities> Parse() throws IOException {
         Document doc = Jsoup.connect(URL).get();
         Elements strU = doc.getElementsByClass("s");
 
@@ -54,8 +54,7 @@ public class JsoupParser {
                     ));
             i++;
         }
-
-        System.out.print(univers.get(33).getSpeciality());
+        return univers;
     }
 
     public static Discipline getDisc(String input) {
