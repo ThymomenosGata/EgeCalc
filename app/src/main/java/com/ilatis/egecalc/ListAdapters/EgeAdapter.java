@@ -21,7 +21,7 @@ public class EgeAdapter extends BaseAdapter {
     LayoutInflater inflater;
     ArrayList<ListForEge> objects;
 
-    EgeAdapter(Context context, ArrayList<ListForEge> products) {
+    public EgeAdapter(Context context, ArrayList<ListForEge> products) {
         ctx = context;
         objects = products;
         inflater = (LayoutInflater) ctx
@@ -57,8 +57,8 @@ public class EgeAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.napr)).setText(String.valueOf(listVV.special));
         ((TextView) view.findViewById(R.id.disciplins)).setText(String.valueOf(listVV.disvipl));
         ((TextView) view.findViewById(R.id.university)).setText(listVV.univers);
-        ((TextView) view.findViewById(R.id.balls)).setText(listVV.ball);
-        ((TextView) view.findViewById(R.id.zp)).setText(listVV.money);
+        ((TextView) view.findViewById(R.id.balls)).setText(String.valueOf(listVV.ball));
+        ((TextView) view.findViewById(R.id.zp)).setText(String.valueOf(listVV.money));
 
         return view;
     }
