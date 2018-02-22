@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ilatis.egecalc.Data.DATAHelper;
-import com.ilatis.egecalc.Data.DisciplineHelper;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
+import com.ilatis.egecalc.Fragments.AlertDialogMain;
+import com.ilatis.egecalc.Fragments.ErrorDialog;
+import com.ilatis.egecalc.Fragments.ErrorDialogTwo;
 import com.ilatis.egecalc.Fragments.FragmentOfBalls;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
 import com.ilatis.egecalc.Parser.HelperClasses.ClassForUniversities;
@@ -34,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private Button btn;
     DATAHelper sqlH;
-    DisciplineHelper sqlD;
     EditHelper eSQL;
     private EditText rus;
     private EditText math;
@@ -60,25 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<ListForEge> arrayList = new  ArrayList<ListForEge>();
         sqlH = new DATAHelper(getBaseContext());
-        sqlD = new DisciplineHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
 
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         SQLiteDatabase sql = sqlH.getWritableDatabase();
-        SQLiteDatabase sqls = sqlD.getWritableDatabase();
 
         Cursor c = sql.query(
                 DATAHelper.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        Cursor cc = sqls.query(
-                DisciplineHelper.TABLE_NAME,
                 null,
                 null,
                 null,
@@ -97,71 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        if(!c.moveToFirst() && !cc.moveToFirst()){
+        if(!c.moveToFirst()){
             new MyTask().execute();
         }
-        else
-            if(c.moveToFirst() && cc.moveToFirst()){
-
-            int univerIndex = c.getColumnIndex(DATAHelper.COLUMN_UNIVERSITY);
-            int specifIndex = c.getColumnIndex(DATAHelper.COLUMN_SPECIALITY);
-            int ballsIndex = c.getColumnIndex(DATAHelper.COLUMN_BALL);
-            int moneyIndex = c.getColumnIndex(DATAHelper.COLUMN_MONEY);
-
-            int ruIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_RU);
-            int mathIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_MATH);
-            int obshIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_OBSH);
-            int fizIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_FIZ);
-            int istIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_IST);
-            int bioIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_BIO);
-            int chemIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_CHEM);
-            int langIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_LANG);
-            int iktIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_IKT);
-            int geoIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_GEO);
-            int litIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_LIT);
-
-            do{
-                String disp = "";
-                if(cc.getInt(ruIndex) == 1){
-                    disp+="русский; ";
-                }
-                if(cc.getInt(mathIndex) == 1){
-                    disp+="математика; ";
-                }
-                if(cc.getInt(obshIndex) == 1){
-                    disp+="обществознание; ";
-                }
-                if(cc.getInt(fizIndex) == 1){
-                    disp+="физика; ";
-                }
-                if(cc.getInt(istIndex) == 1){
-                    disp+="история; ";
-                }
-                if(cc.getInt(bioIndex) == 1){
-                    disp+="биология; ";
-                }
-                if(cc.getInt(chemIndex) == 1){
-                    disp+="химия; ";
-                }
-                if(cc.getInt(langIndex) == 1){
-                    disp+="иностранный язык; ";
-                }
-                if(cc.getInt(iktIndex) == 1){
-                    disp+="информатика и ИКТ; ";
-                }
-                if(cc.getInt(geoIndex) == 1){
-                    disp+="география; ";
-                }
-                if(cc.getInt(litIndex) == 1){
-                    disp+="литература; ";
-                }
-
-                arrayList.add(new ListForEge(c.getString(univerIndex), disp,
-                        c.getString(specifIndex),c.getInt(ballsIndex), c.getInt(moneyIndex)));
-            }while (c.moveToNext() && cc.moveToNext());
-        }
-        c.close();
-        cc.close();
 
         rus = (EditText)findViewById(R.id.rusBalls);
         math = (EditText)findViewById(R.id.mathBalls);
@@ -180,63 +108,150 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int co = 0;
+                int coc = 0;
                 if(!rus.getText().toString().equals("")){
-                    listV.add(new ListForInterface("русский",
-                            Integer.parseInt(rus.getText().toString())));
+                    if(Integer.parseInt(rus.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("русский язык",
+                                Integer.parseInt(rus.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!math.getText().toString().equals("")){
-                    listV.add(new ListForInterface("математика",
-                            Integer.parseInt(math.getText().toString())));
+                    if(Integer.parseInt(math.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("математика",
+                                Integer.parseInt(math.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!obsh.getText().toString().equals("")){
-                    listV.add(new ListForInterface("обществознание",
-                            Integer.parseInt(obsh.getText().toString())));
+                    if(Integer.parseInt(obsh.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("обществознание",
+                                Integer.parseInt(obsh.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!fiz.getText().toString().equals("")){
-                    listV.add(new ListForInterface("физика",
-                            Integer.parseInt(fiz.getText().toString())));
+                    if(Integer.parseInt(fiz.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("физика",
+                                Integer.parseInt(fiz.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!him.getText().toString().equals("")){
-                    listV.add(new ListForInterface("химия",
-                            Integer.parseInt(him.getText().toString())));
+                    if(Integer.parseInt(him.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("химия",
+                                Integer.parseInt(him.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!bio.getText().toString().equals("")){
-                    listV.add(new ListForInterface("биология",
-                            Integer.parseInt(bio.getText().toString())));
+                    if(Integer.parseInt(bio.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("биология",
+                                Integer.parseInt(bio.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!ist.getText().toString().equals("")){
-                    listV.add(new ListForInterface("история",
-                            Integer.parseInt(ist.getText().toString())));
+                    if(Integer.parseInt(ist.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("история",
+                                Integer.parseInt(ist.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!ikt.getText().toString().equals("")){
-                    listV.add(new ListForInterface("информатика",
-                            Integer.parseInt(ikt.getText().toString())));
+                    if(Integer.parseInt(ikt.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("информатика и ИКТ",
+                                Integer.parseInt(ikt.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!geo.getText().toString().equals("")){
-                    listV.add(new ListForInterface("география",
-                            Integer.parseInt(geo.getText().toString())));
+                    if(Integer.parseInt(geo.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("география",
+                                Integer.parseInt(geo.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!lang.getText().toString().equals("")){
-                    listV.add(new ListForInterface("иностранный язык",
-                            Integer.parseInt(lang.getText().toString())));
+                    if(Integer.parseInt(lang.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("иностранный язык",
+                                Integer.parseInt(lang.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
                 }
                 if(!lit.getText().toString().equals("")){
-                    listV.add(new ListForInterface("литература",
-                            Integer.parseInt(lit.getText().toString())));
+                    if( Integer.parseInt(lit.getText().toString()) <= 100) {
+                        listV.add(new ListForInterface("литература",
+                                Integer.parseInt(lit.getText().toString())));
+                        coc++;
+                    }
+                    else
+                        co++;
+
                 }
 
-                ContentValues vs = new ContentValues();
-                for(ListForInterface list : listV){
-                    vs.put(EditHelper.COLUMN_DISC, list.getDisc());
-                    vs.put(EditHelper.COLUMN_BALLS, list.getBall());
-                    sqlE.insert(EditHelper.TABLE_NAME,
-                            null,
-                            vs);
+                if(co == 0 && coc > 2) {
+                    ContentValues vs = new ContentValues();
+                    for (ListForInterface list : listV) {
+                        vs.put(EditHelper.COLUMN_DISC, list.getDisc());
+                        vs.put(EditHelper.COLUMN_BALLS, list.getBall());
+                        sqlE.insert(EditHelper.TABLE_NAME,
+                                null,
+                                vs);
+                    }
+                    loadFragment(FragmentOfBalls.newInstace());
                 }
-
-                loadFragment(FragmentOfBalls.newInstace());
+                else {
+                    if(co !=0) {
+                        error();
+                        DialogFragment dialog = new ErrorDialog();
+                        dialog.show(getSupportFragmentManager(), "Error1");
+                    }
+                    if(coc < 3){
+                        DialogFragment dialog = new ErrorDialogTwo();
+                        dialog.show(getSupportFragmentManager(), "Error2");
+                    }
+                }
             }
         });
+    }
+
+    private void error(){
+        eSQL = new EditHelper(getBaseContext());
+        SQLiteDatabase sqlE = eSQL.getWritableDatabase();
+        sqlE.delete(EditHelper.TABLE_NAME, null, null);
+        rus.setText("");
+        math.setText("");
+        obsh.setText("");
+        bio.setText("");
+        him.setText("");
+        geo.setText("");
+        fiz.setText("");
+        ikt.setText("");
+        ist.setText("");
+        lang.setText("");
+        lit.setText("");
     }
 
     private class MyTask extends AsyncTask<Void, ArrayList<ClassForUniversities>, ArrayList<ClassForUniversities>> {
@@ -258,75 +273,19 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(univer);
 
             sqlH = new DATAHelper(getBaseContext());
-            sqlD = new DisciplineHelper(getBaseContext());
 
             SQLiteDatabase sql = sqlH.getWritableDatabase();
-            SQLiteDatabase sqls = sqlD.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            ContentValues vals = new ContentValues();
             for(ClassForUniversities un : univer){
                 values.put(DATAHelper.COLUMN_UNIVERSITY, un.getUniverity());
                 values.put(DATAHelper.COLUMN_SPECIALITY, un.getSpeciality());
+                values.put(DATAHelper.COLUMN_DISCIPLINE, un.getDisciplins());
                 values.put(DATAHelper.COLUMN_BALL, un.getBalsOf());
                 values.put(DATAHelper.COLUMN_MONEY, 0);
-                System.out.println(un.getUniverity());
-
-                if(un.getDisp().getBio())
-                    vals.put(DisciplineHelper.COLUMN_BIO, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_BIO, 0);
-
-                if(un.getDisp().getRus())
-                    vals.put(DisciplineHelper.COLUMN_RU, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_RU, 0);
-
-                if(un.getDisp().getMat())
-                    vals.put(DisciplineHelper.COLUMN_MATH, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_MATH, 0);
-
-                if(un.getDisp().getObsh())
-                    vals.put(DisciplineHelper.COLUMN_OBSH, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_OBSH, 0);
-
-                if(un.getDisp().getIst())
-                    vals.put(DisciplineHelper.COLUMN_IST, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_IST, 0);
-
-                if(un.getDisp().getInyz())
-                    vals.put(DisciplineHelper.COLUMN_LANG, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_LANG, 0);
-
-                if(un.getDisp().getGeo())
-                    vals.put(DisciplineHelper.COLUMN_GEO, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_GEO, 0);
-                if(un.getDisp().getLit())
-                    vals.put(DisciplineHelper.COLUMN_LIT, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_LIT, 0);
-
-                if(un.getDisp().getHim())
-                    vals.put(DisciplineHelper.COLUMN_CHEM, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_CHEM, 0);
-
-                if(un.getDisp().getIkt())
-                    vals.put(DisciplineHelper.COLUMN_IKT, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_IKT, 0);
-                if(un.getDisp().getFiz())
-                    vals.put(DisciplineHelper.COLUMN_FIZ, 1);
-                else
-                    vals.put(DisciplineHelper.COLUMN_FIZ, 0);
-
+                DialogFragment dialog = new AlertDialogMain();
+                dialog.show(getSupportFragmentManager(), "alert");
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
-                sqls.insert(DisciplineHelper.TABLE_NAME, null, vals);
             }
         }
     }

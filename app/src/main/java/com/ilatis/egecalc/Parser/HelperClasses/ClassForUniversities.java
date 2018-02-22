@@ -8,17 +8,17 @@ public class ClassForUniversities {
     private String univerity;
     private String codeOfUn;
     private String speciality;
-    private Discipline disp;
+    private String disciplins;
     private int balsOf;
     private int yourBals;
 
     public ClassForUniversities(String univerity, String codeOfUn,
-                                String speciality, Discipline disp,
+                                String speciality, String disciplins,
                                 int balsOf, int yourBals) {
         this.univerity = univerity;
         this.codeOfUn = codeOfUn;
         this.speciality = speciality;
-        this.disp = disp;
+        this.disciplins = disciplins;
         this.balsOf = balsOf;
         this.yourBals = yourBals;
     }
@@ -35,8 +35,8 @@ public class ClassForUniversities {
         return speciality;
     }
 
-    public Discipline getDisp() {
-        return disp;
+    public String getDisciplins() {
+        return disciplins;
     }
 
     public int getBalsOf() {

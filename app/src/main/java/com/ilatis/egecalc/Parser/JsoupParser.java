@@ -1,7 +1,6 @@
 package com.ilatis.egecalc.Parser;
 
 import com.ilatis.egecalc.Parser.HelperClasses.ClassForUniversities;
-import com.ilatis.egecalc.Parser.HelperClasses.Discipline;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,54 +39,19 @@ public class JsoupParser {
             String ss = geter(strS.text(), strD.text());
             int prB = Integer.parseInt(geter(strC.text(), " "));
             int prY = Integer.parseInt(geter(strY.text(), " "));
-            Discipline disc = new Discipline();
-            disc = getDisc(strD.text());
 
             univers.add(
                     new ClassForUniversities(el.getElementsByClass("light_gray_blue").text(),
                             doc.getElementsByClass("s").get(i)
                                     .getElementsByClass("light_gray_back gray_border_right").text(),
                             ss,
-                            disc,
+                            strD.text(),
                             prB,
                             prY
                     ));
             i++;
         }
         return univers;
-    }
-
-    public static Discipline getDisc(String input) {
-
-        Discipline disc = new Discipline();
-        Pattern pattern = Pattern.compile("[ ,.!?]");
-        String[] str = pattern.split(input);
-        for (String s : str) {
-            if (s.equals("обществознание")) {
-                disc.setObsh(true);
-            } else if (s.equals("русский")) {
-                disc.setRus(true);
-            } else if (s.equals("информатика и ИКТ")) {
-                disc.setIkt(true);
-            } else if (s.equals("биология")) {
-                disc.setBio(true);
-            } else if (s.equals("химия")) {
-                disc.setHim(true);
-            } else if (s.equals("физика")) {
-                disc.setFiz(true);
-            } else if (s.equals("литература")) {
-                disc.setLit(true);
-            } else if (s.equals("география")) {
-                disc.setGeo(true);
-            } else if (s.equals("история")) {
-                disc.setIst(true);
-            } else if (s.equals("математика")) {
-                disc.setMat(true);
-            } else if (s.equals("иностранный язык")) {
-                disc.setInyz(true);
-            }
-        }
-        return disc;
     }
 
     public static String geter(String input, String inputCut){

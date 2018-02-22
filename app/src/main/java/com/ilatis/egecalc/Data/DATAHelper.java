@@ -17,6 +17,7 @@ public class DATAHelper extends SQLiteOpenHelper {
     public final static String _ID = BaseColumns._ID;
     public final static String COLUMN_UNIVERSITY = "university";
     public final static String COLUMN_SPECIALITY = "speciality";
+    public final static String COLUMN_DISCIPLINE = "discipline";
     public final static String COLUMN_BALL = "ball";
     public final static String COLUMN_MONEY = "money";
 
@@ -25,7 +26,7 @@ public class DATAHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Datas.db";
 
     //Версия базы данных. При изменении схемы увеличить на единицу
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DATAHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,6 +43,7 @@ public class DATAHelper extends SQLiteOpenHelper {
                 + _ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_UNIVERSITY + " TEXT, "
                 + COLUMN_SPECIALITY + " TEXT, "
+                + COLUMN_DISCIPLINE + " TEXT, "
                 + COLUMN_BALL + " INTEGER, "
                 + COLUMN_MONEY + " INTEGER" + ")");
     }

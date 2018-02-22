@@ -8,11 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.ilatis.egecalc.Data.DATAHelper;
-import com.ilatis.egecalc.Data.DisciplineHelper;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
 import com.ilatis.egecalc.ListAdapters.EgeAdapter;
@@ -20,6 +18,7 @@ import com.ilatis.egecalc.ListAdapters.ListForEge;
 import com.ilatis.egecalc.R;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by thymomenosgata on 19.02.18.
@@ -38,7 +37,6 @@ public class FragmentOfBalls extends Fragment {
     ArrayList<ListForEge> arrayList = new ArrayList<>();
     EditHelper eSQL;
     DATAHelper sqlH;
-    DisciplineHelper sqlD;
     EgeAdapter adapter;
 
     @Nullable
@@ -48,9 +46,7 @@ public class FragmentOfBalls extends Fragment {
 
         sqlH = new DATAHelper(getContext());
         eSQL = new EditHelper(getContext());
-        sqlD = new DisciplineHelper(getContext());
 
-        final SQLiteDatabase sqls = sqlD.getWritableDatabase();
         final SQLiteDatabase sql = eSQL.getWritableDatabase();
         final SQLiteDatabase sqlD = sqlH.getWritableDatabase();
         Cursor c = sql.query(
@@ -84,81 +80,60 @@ public class FragmentOfBalls extends Fragment {
                 null,
                 null
         );
-        Cursor cc = sqls.query(
-                DisciplineHelper.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
 
 
-        if(c.moveToFirst() && cc.moveToFirst()){
+        if(c.moveToFirst()){
             int univerIndex = c.getColumnIndex(DATAHelper.COLUMN_UNIVERSITY);
             int specifIndex = c.getColumnIndex(DATAHelper.COLUMN_SPECIALITY);
+            int discIndex = c.getColumnIndex(DATAHelper.COLUMN_DISCIPLINE);
             int ballsIndex = c.getColumnIndex(DATAHelper.COLUMN_BALL);
             int moneyIndex = c.getColumnIndex(DATAHelper.COLUMN_MONEY);
-
-            int ruIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_RU);
-            int mathIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_MATH);
-            int obshIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_OBSH);
-            int fizIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_FIZ);
-            int istIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_IST);
-            int bioIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_BIO);
-            int chemIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_CHEM);
-            int langIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_LANG);
-            int iktIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_IKT);
-            int geoIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_GEO);
-            int litIndex = cc.getColumnIndex(DisciplineHelper.COLUMN_LIT);
-
             do{
-                String disp = "";
-                if(cc.getInt(ruIndex) == 1){
-                    disp+="русский; ";
-                }
-                if(cc.getInt(mathIndex) == 1){
-                    disp+="математика; ";
-                }
-                if(cc.getInt(obshIndex) == 1){
-                    disp+="обществознание; ";
-                }
-                if(cc.getInt(fizIndex) == 1){
-                    disp+="физика; ";
-                }
-                if(cc.getInt(istIndex) == 1){
-                    disp+="история; ";
-                }
-                if(cc.getInt(bioIndex) == 1){
-                    disp+="биология; ";
-                }
-                if(cc.getInt(chemIndex) == 1){
-                    disp+="химия; ";
-                }
-                if(cc.getInt(langIndex) == 1){
-                    disp+="иностранный язык; ";
-                }
-                if(cc.getInt(iktIndex) == 1){
-                    disp+="информатика и ИКТ; ";
-                }
-                if(cc.getInt(geoIndex) == 1){
-                    disp+="география; ";
-                }
-                if(cc.getInt(litIndex) == 1){
-                    disp+="литература; ";
-                }
-
-                arrayList.add(new ListForEge(c.getString(univerIndex), disp,
-                        c.getString(specifIndex),c.getInt(ballsIndex), c.getInt(moneyIndex)));
-            }while (c.moveToNext() && cc.moveToNext());
+                arrayList.add(new ListForEge(c.getString(univerIndex),
+                        c.getString(discIndex), c.getString(specifIndex),
+                        c.getInt(ballsIndex), c.getInt(moneyIndex)));
+            }while (c.moveToNext());
         }
 
+        ArrayList<ListForEge> arrayZ = new ArrayList<>();
+        int sum = 0;
+        for(ListForInterface list : listSS){
+            sum+=list.getBall();
+        }
+
+        for(ListForEge ege : arrayList){
+            if(ege.getBall() <= sum && search(listSS, ege)){
+                arrayZ.add(new ListForEge(ege.getUnivers(), ege.getDisvipl(),
+                        ege.getSpecial(), ege.getBall(), ege.getMoney()));
+            }
+        }
         ListView listView = (ListView)v.findViewById(R.id.listForRait);
-        adapter = new EgeAdapter(getContext(), arrayList);
+        adapter = new EgeAdapter(getContext(), arrayZ);
         listView.setAdapter(adapter);
 
-
         return v;
+    }
+
+    public static String[] getDisc(String input) {
+        Pattern pattern = Pattern.compile(", ");
+        String[] str = pattern.split(input);
+        return str;
+    }
+
+    public boolean search(ArrayList<ListForInterface> ls, ListForEge list){
+            String[] supDisc = getDisc(list.getDisvipl());
+            int count = 0;
+            for(ListForInterface l : ls){
+                for(String str : supDisc){
+                    if(l.getDisc().equals(str)){
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+            if(count == supDisc.length)
+                return true;
+            else
+                return false;
     }
 }
