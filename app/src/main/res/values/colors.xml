@@ -7,4 +7,5 @@
     <color name="bottomsTextColor">#00c5fc</color>
     <color name="backgroun">#1e1f26</color>
     <color name="textColor">#ffffff</color>
+    <color name="enterTextColor">#e228e6</color>
 </resources>

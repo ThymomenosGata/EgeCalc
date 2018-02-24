@@ -27,4 +27,10 @@ public class ErrorDialogTwo extends DialogFragment {
                 });
         return builder.show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setCanceledOnTouchOutside(false);
+    }
 }

@@ -1,7 +1,9 @@
 package com.ilatis.egecalc;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -28,13 +30,11 @@ import com.ilatis.egecalc.Parser.JsoupParser;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static android.support.v4.app.DialogFragment.*;
+
 public class MainActivity extends AppCompatActivity {
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.activityMain, fragment);
-        ft.commit();
-    }
+    DialogFragment dialogFragment;
     private Button btn;
     DATAHelper sqlH;
     EditHelper eSQL;
@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListForInterface> listV = new ArrayList<>();
 
-
-
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<ListForEge> arrayList = new  ArrayList<ListForEge>();
         sqlH = new DATAHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
-
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         SQLiteDatabase sql = sqlH.getWritableDatabase();
 
@@ -88,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
         );
 
         if(!c.moveToFirst()){
+            dialogFragment = new AlertDialogMain();
+            dialogFragment.show(getSupportFragmentManager(), "errr");
+
             new MyTask().execute();
         }
 
@@ -220,18 +220,18 @@ public class MainActivity extends AppCompatActivity {
                                 null,
                                 vs);
                     }
-                    loadFragment(FragmentOfBalls.newInstace());
+                    listV.removeAll(listV);
+                    Intent intent = new Intent(MainActivity.this, UniversytisActivity.class);
+                    startActivity(intent);
                 }
-                else {
-                    if(co !=0) {
-                        error();
-                        DialogFragment dialog = new ErrorDialog();
-                        dialog.show(getSupportFragmentManager(), "Error1");
-                    }
-                    if(coc < 3){
-                        DialogFragment dialog = new ErrorDialogTwo();
-                        dialog.show(getSupportFragmentManager(), "Error2");
-                    }
+                else if (co != 0) {
+                    error();
+                    DialogFragment dialog = new ErrorDialog();
+                    dialog.show(getSupportFragmentManager(), "Error1");
+                }
+                else if(coc < 3){
+                    DialogFragment dialog = new ErrorDialogTwo();
+                    dialog.show(getSupportFragmentManager(), "Error2");
                 }
             }
         });
@@ -283,10 +283,11 @@ public class MainActivity extends AppCompatActivity {
                 values.put(DATAHelper.COLUMN_DISCIPLINE, un.getDisciplins());
                 values.put(DATAHelper.COLUMN_BALL, un.getBalsOf());
                 values.put(DATAHelper.COLUMN_MONEY, 0);
-                DialogFragment dialog = new AlertDialogMain();
-                dialog.show(getSupportFragmentManager(), "alert");
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
             }
+            dialogFragment.dismiss();
         }
     }
+
+
 }

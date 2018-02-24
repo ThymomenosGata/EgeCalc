@@ -22,7 +22,7 @@
     <Button
         android:id="@+id/startSearch"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="@string/getUniver"
         android:background="@color/bottomsColor"
         android:textColor="@color/bottomsTextColor"
@@ -33,6 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:layout_weight="0.150"
+        android:layout_weight="0.15"
         android:focusable="true" />
 </LinearLayout>

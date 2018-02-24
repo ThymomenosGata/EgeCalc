@@ -47,8 +47,8 @@ public class FragmentOfBalls extends Fragment {
         sqlH = new DATAHelper(getContext());
         eSQL = new EditHelper(getContext());
 
-        final SQLiteDatabase sql = eSQL.getWritableDatabase();
-        final SQLiteDatabase sqlD = sqlH.getWritableDatabase();
+        SQLiteDatabase sql = eSQL.getWritableDatabase();
+        SQLiteDatabase sqlD = sqlH.getWritableDatabase();
         Cursor c = sql.query(
                 EditHelper.TABLE_NAME,
                 null,
@@ -67,9 +67,7 @@ public class FragmentOfBalls extends Fragment {
             }while (c.moveToNext());
         }
         c.close();
-        sql.delete(EditHelper.TABLE_NAME,
-                null,
-                null);
+        sql.delete(EditHelper.TABLE_NAME, null, null);
 
         c = sqlD.query(DATAHelper.TABLE_NAME,
                 null,
@@ -122,18 +120,18 @@ public class FragmentOfBalls extends Fragment {
 
     public boolean search(ArrayList<ListForInterface> ls, ListForEge list){
             String[] supDisc = getDisc(list.getDisvipl());
-            int count = 0;
+            int cer = 0;
             for(ListForInterface l : ls){
                 for(String str : supDisc){
                     if(l.getDisc().equals(str)){
-                        count++;
+                        cer++;
                     }
                 }
             }
-            System.out.println(count);
-            if(count == supDisc.length)
+            if(cer == supDisc.length)
                 return true;
             else
                 return false;
+
     }
 }

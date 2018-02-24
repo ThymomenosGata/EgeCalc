@@ -17,10 +17,11 @@
     <string name="info1">Вступительные предметы</string>
     <string name="info2">Проходной балл</string>
     <string name="info3">Средняя зарплата</string>
-    <string name="info4">Введите ваши баллы:</string>
+    <string name="info5">Университет</string>
     <string name="infoError">Введите корректные баллы!</string>
     <string name="infoError2">Предметов должно быть больше двух!</string>
     <string name="osk">Oк</string>
     <string name="eerror">Ошибка!</string>
-    <string name="Aldial">Пожалуйста подождите. Идет загрузка новых данных..</string>
+    <string name="titleER">Пожалуйста подождите</string>
+    <string name="Aldial">Идет загрузка новых данных..</string>
 </resources>

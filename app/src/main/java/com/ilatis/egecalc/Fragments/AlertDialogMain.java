@@ -15,8 +15,14 @@ public class AlertDialogMain extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.titleER);
         builder.setMessage(R.string.Aldial);
-        builder.setCancelable(false);
         return builder.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setCanceledOnTouchOutside(false);
     }
 }
