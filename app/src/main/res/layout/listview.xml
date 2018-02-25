@@ -22,6 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
+            android:textAlignment="center"
+            android:textSize="20pt"
+            android:textStyle="bold|italic"
             android:text="" />
 
         <TextView
@@ -29,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
+            android:textSize="15pt"
             android:text="@string/info1" />
 
         <TextView
@@ -36,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
+            android:textSize="20pt"
             android:text="" />
 
         <TextView
@@ -43,13 +48,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
+            android:textSize="15pt"
             android:text="@string/info5" />
 
         <TextView
             android:id="@+id/university"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="@color/bottomsTextColor"
+            android:textSize="20pt"
             android:text="" />
 
         <LinearLayout
@@ -63,6 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/textColor"
+                android:textAlignment="center"
+                android:textSize="17pt"
                 android:text="@string/info2" />
 
             <TextView
@@ -71,6 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/textColor"
+                android:textAlignment="center"
+                android:textSize="17pt"
                 android:text="@string/info3" />
         </LinearLayout>
 
@@ -85,6 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/textColor"
+                android:textAlignment="center"
+                android:textSize="20pt"
                 android:text="" />
 
             <TextView
@@ -93,6 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/textColor"
+                android:textAlignment="center"
+                android:textSize="20pt"
                 android:text="" />
         </LinearLayout>
     </LinearLayout>

@@ -17,6 +17,7 @@ import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
 import com.ilatis.egecalc.Fragments.FragmentOfBalls;
+import com.ilatis.egecalc.Fragments.RaitingFragment;
 
 import java.util.ArrayList;
 
@@ -69,7 +70,7 @@ public class UniversytisActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                btnEk.setTextColor(getColor(R.color.enterTextColor));
+                btnEk.setTextColor(getColor(R.color.bottomsTextColor));
                 btnMn.setTextColor(getColor(R.color.textColor));
                 ContentValues vs = new ContentValues();
                 for (ListForInterface lists : list) {
@@ -88,8 +89,8 @@ public class UniversytisActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btnEk.setTextColor(getColor(R.color.textColor));
-                btnMn.setTextColor(getColor(R.color.enterTextColor));
-                //loadFragment(FragmentOfBalls.newInstace());
+                btnMn.setTextColor(getColor(R.color.bottomsTextColor));
+                loadFragment(RaitingFragment.newInstace());
             }
         });
 

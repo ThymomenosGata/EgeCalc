@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ilatis.egecalc.Data.DATAHelper;
+import com.ilatis.egecalc.Data.DataRait;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
 import com.ilatis.egecalc.Fragments.AlertDialogMain;
@@ -25,7 +26,9 @@ import com.ilatis.egecalc.Fragments.ErrorDialogTwo;
 import com.ilatis.egecalc.Fragments.FragmentOfBalls;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
 import com.ilatis.egecalc.Parser.HelperClasses.ClassForUniversities;
+import com.ilatis.egecalc.Parser.HelperClasses.ClassRaiting;
 import com.ilatis.egecalc.Parser.JsoupParser;
+import com.ilatis.egecalc.Parser.ParseRaiting;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     DATAHelper sqlH;
     EditHelper eSQL;
+    DataRait sqlR;
     private EditText rus;
     private EditText math;
     private EditText obsh;
@@ -61,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<ListForEge> arrayList = new  ArrayList<ListForEge>();
         sqlH = new DATAHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
+        sqlR = new DataRait(getBaseContext());
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
+        final SQLiteDatabase rSql = sqlR.getWritableDatabase();
         SQLiteDatabase sql = sqlH.getWritableDatabase();
 
         Cursor c = sql.query(
@@ -74,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        final Cursor ccc = sqlE.query(
-                EditHelper.TABLE_NAME,
+        final Cursor r = rSql.query(
+                DataRait.TABLE_NAME,
                 null,
                 null,
                 null,
@@ -84,12 +90,16 @@ public class MainActivity extends AppCompatActivity {
                 null
         );
 
-        if(!c.moveToFirst()){
+        if(!c.moveToFirst() || !r.moveToFirst()){
             dialogFragment = new AlertDialogMain();
             dialogFragment.show(getSupportFragmentManager(), "errr");
 
             new MyTask().execute();
+            new newTask().execute();
         }
+
+        c.close();
+        r.close();
 
         rus = (EditText)findViewById(R.id.rusBalls);
         math = (EditText)findViewById(R.id.mathBalls);
@@ -255,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class MyTask extends AsyncTask<Void, ArrayList<ClassForUniversities>, ArrayList<ClassForUniversities>> {
-
         @Override
         protected ArrayList<ClassForUniversities> doInBackground(Void... params) {
             ArrayList<ClassForUniversities> univers = new ArrayList<>();
@@ -273,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(univer);
 
             sqlH = new DATAHelper(getBaseContext());
-
             SQLiteDatabase sql = sqlH.getWritableDatabase();
 
             ContentValues values = new ContentValues();
@@ -284,6 +292,39 @@ public class MainActivity extends AppCompatActivity {
                 values.put(DATAHelper.COLUMN_BALL, un.getBalsOf());
                 values.put(DATAHelper.COLUMN_MONEY, 0);
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
+            }
+
+            dialogFragment.dismiss();
+        }
+    }
+
+    private class newTask extends AsyncTask<Void, ArrayList<ClassRaiting>, ArrayList<ClassRaiting>>{
+
+        @Override
+        protected ArrayList<ClassRaiting> doInBackground(Void... voids) {
+            ArrayList<ClassRaiting> rait = new ArrayList<>();
+            try {
+                for(ClassRaiting r : ParseRaiting.Parser())
+                    rait.add(r);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return rait;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<ClassRaiting> rait) {
+            super.onPostExecute(rait);
+            sqlR = new DataRait(getBaseContext());
+
+            SQLiteDatabase sR = sqlR.getWritableDatabase();
+
+            ContentValues val = new ContentValues();
+            for(ClassRaiting r : rait){
+                val.put(DataRait.COLUMN_UNIVERSITY, r.getName());
+                val.put(DataRait.COLUMN_PROC, r.getProc());
+                val.put(DataRait.COLUMN_MONEY, r.getMoney());
+                sR.insert(DataRait.TABLE_NAME, null, val);
             }
             dialogFragment.dismiss();
         }

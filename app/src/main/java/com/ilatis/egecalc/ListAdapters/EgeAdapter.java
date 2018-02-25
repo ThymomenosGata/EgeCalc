@@ -63,7 +63,6 @@ public class EgeAdapter extends BaseAdapter {
         return view;
     }
 
-    // товар по позиции
     ListForEge getListVV(int position) {
         return ((ListForEge) getItem(position));
     }

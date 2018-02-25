@@ -24,4 +24,6 @@
     <string name="eerror">Ошибка!</string>
     <string name="titleER">Пожалуйста подождите</string>
     <string name="Aldial">Идет загрузка новых данных..</string>
+    <string name="infoproc">Средняя доля трудоустройства</string>
+    <string name="infozp">Средняя зарплата выпускников</string>
 </resources>
