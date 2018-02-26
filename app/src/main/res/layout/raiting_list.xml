@@ -20,7 +20,7 @@
             android:id="@+id/uni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:background="@color/bottomsColor"
             android:textColor="@color/textColor"
             android:text="" />

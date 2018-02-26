@@ -1,7 +1,6 @@
 package com.ilatis.egecalc;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -54,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText lit;
     private EditText fiz;
 
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.containerss, fragment);
+        ft.commit();
+    }
+
     ArrayList<ListForInterface> listV = new ArrayList<>();
 
     @SuppressLint("WrongViewCast")
@@ -61,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         final ArrayList<ListForEge> arrayList = new  ArrayList<ListForEge>();
         sqlH = new DATAHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
