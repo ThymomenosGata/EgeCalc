@@ -13,13 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
+import com.ilatis.egecalc.Data.StructClass;
 import com.ilatis.egecalc.Fragments.FragmentOfBalls;
 import com.ilatis.egecalc.Fragments.RaitingFragment;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by thymomenosgata on 23.02.18.
@@ -42,9 +50,8 @@ public class UniversytisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.universiti_activity);
         eSQL = new EditHelper(getBaseContext());
-        sqlH = new DATAHelper(getBaseContext());
-        final SQLiteDatabase sqlD = sqlH.getWritableDatabase();
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
+
         final Button btnEk = (Button) findViewById(R.id.butEkz);
         final Button btnMn = (Button) findViewById(R.id.butZP);
         Cursor c = sqlE.query(
@@ -72,14 +79,6 @@ public class UniversytisActivity extends AppCompatActivity {
             public void onClick(View v) {
                 btnEk.setTextColor(getColor(R.color.bottomsTextColor));
                 btnMn.setTextColor(getColor(R.color.textColor));
-                ContentValues vs = new ContentValues();
-                for (ListForInterface lists : list) {
-                    vs.put(EditHelper.COLUMN_DISC, lists.getDisc());
-                    vs.put(EditHelper.COLUMN_BALLS, lists.getBall());
-                    sqlE.insert(EditHelper.TABLE_NAME,
-                            null,
-                            vs);
-                }
                 loadFragment(FragmentOfBalls.newInstace());
             }
         });

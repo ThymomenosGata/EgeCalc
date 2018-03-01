@@ -10,14 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.EditHelper;
+import com.ilatis.egecalc.Data.ExamsClass;
 import com.ilatis.egecalc.Data.ListForInterface;
+import com.ilatis.egecalc.Data.MSClass;
+import com.ilatis.egecalc.Data.StructClass;
 import com.ilatis.egecalc.ListAdapters.EgeAdapter;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
+import com.ilatis.egecalc.Parser.HelperClasses.ClassRaiting;
 import com.ilatis.egecalc.R;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -38,6 +49,7 @@ public class FragmentOfBalls extends Fragment {
     EditHelper eSQL;
     DATAHelper sqlH;
     EgeAdapter adapter;
+
 
     @Nullable
     @Override
@@ -67,7 +79,6 @@ public class FragmentOfBalls extends Fragment {
             }while (c.moveToNext());
         }
         c.close();
-        sql.delete(EditHelper.TABLE_NAME, null, null);
 
         c = sqlD.query(DATAHelper.TABLE_NAME,
                 null,
@@ -100,7 +111,7 @@ public class FragmentOfBalls extends Fragment {
         }
 
         for(ListForEge ege : arrayList){
-            if(ege.getBall() <= sum && search(listSS, ege)){
+            if(ege.getBall() != 0 && ege.getBall() <= sum && search(listSS, ege)){
                 arrayZ.add(new ListForEge(ege.getUnivers(), ege.getDisvipl(),
                         ege.getSpecial(), ege.getBall(), ege.getMoney()));
             }
@@ -133,5 +144,22 @@ public class FragmentOfBalls extends Fragment {
             else
                 return false;
 
+    }
+    public List<StructClass> getJs(){
+        Gson gson = new Gson();
+        BufferedReader br;
+        List<StructClass> list;
+        List<StructClass> list2;
+        InputStream is = getResources().openRawResource(R.raw.msk);
+        Type founderListType = new TypeToken<ArrayList<StructClass>>(){}.getType();
+        br = new BufferedReader(new InputStreamReader(is));
+        list = gson.fromJson(br, founderListType);
+        is = getResources().openRawResource(R.raw.spb);
+        br = new BufferedReader(new InputStreamReader(is));
+        list2 = gson.fromJson(br, founderListType);
+        for(StructClass st : list2)
+            list.add(st);
+        list2.clear();
+        return list;
     }
 }

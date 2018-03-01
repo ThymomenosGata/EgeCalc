@@ -15,24 +15,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.DataRait;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
+import com.ilatis.egecalc.Data.MSClass;
+import com.ilatis.egecalc.Data.StructClass;
 import com.ilatis.egecalc.Fragments.AlertDialogMain;
 import com.ilatis.egecalc.Fragments.ErrorDialog;
 import com.ilatis.egecalc.Fragments.ErrorDialogTwo;
-import com.ilatis.egecalc.Fragments.FragmentOfBalls;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
-import com.ilatis.egecalc.Parser.HelperClasses.ClassForUniversities;
 import com.ilatis.egecalc.Parser.HelperClasses.ClassRaiting;
-import com.ilatis.egecalc.Parser.JsoupParser;
 import com.ilatis.egecalc.Parser.ParseRaiting;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static android.support.v4.app.DialogFragment.*;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ArrayList<ListForEge> arrayList = new  ArrayList<ListForEge>();
+
         sqlH = new DATAHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
         sqlR = new DataRait(getBaseContext());
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         final SQLiteDatabase rSql = sqlR.getWritableDatabase();
-        SQLiteDatabase sql = sqlH.getWritableDatabase();
+        final SQLiteDatabase sql = sqlH.getWritableDatabase();
 
         Cursor c = sql.query(
                 DATAHelper.TABLE_NAME,
@@ -97,9 +101,16 @@ public class MainActivity extends AppCompatActivity {
         if(!c.moveToFirst() || !r.moveToFirst()){
             dialogFragment = new AlertDialogMain();
             dialogFragment.show(getSupportFragmentManager(), "errr");
-
-            new MyTask().execute();
-            new newTask().execute();
+            if(!c.moveToFirst() && !r.moveToFirst()) {
+                new MyTask().execute();
+                new newTask().execute();
+            }
+            else if(!c.moveToFirst()){
+                new MyTask().execute();
+            }
+            else if(!r.moveToFirst()){
+                new newTask().execute();
+            }
         }
 
         c.close();
@@ -122,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sqlE.delete(EditHelper.TABLE_NAME, null, null);
                 int co = 0;
                 int coc = 0;
                 if(!rus.getText().toString().equals("")){
@@ -268,37 +280,30 @@ public class MainActivity extends AppCompatActivity {
         lit.setText("");
     }
 
-    private class MyTask extends AsyncTask<Void, ArrayList<ClassForUniversities>, ArrayList<ClassForUniversities>> {
+    private class MyTask extends AsyncTask<Void, ArrayList<ListForEge>, ArrayList<ListForEge>> {
         @Override
-        protected ArrayList<ClassForUniversities> doInBackground(Void... params) {
-            ArrayList<ClassForUniversities> univers = new ArrayList<>();
-            try {
-                for(ClassForUniversities cl : JsoupParser.Parse())
-                    univers.add(cl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        protected ArrayList<ListForEge> doInBackground(Void... params) {
+            ArrayList<ListForEge> univers = new ArrayList<>();
+            univers = getList();
             return univers;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<ClassForUniversities> univer) {
+        protected void onPostExecute(ArrayList<ListForEge> univer) {
             super.onPostExecute(univer);
 
             sqlH = new DATAHelper(getBaseContext());
             SQLiteDatabase sql = sqlH.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            for(ClassForUniversities un : univer){
-                values.put(DATAHelper.COLUMN_UNIVERSITY, un.getUniverity());
-                values.put(DATAHelper.COLUMN_SPECIALITY, un.getSpeciality());
-                values.put(DATAHelper.COLUMN_DISCIPLINE, un.getDisciplins());
-                values.put(DATAHelper.COLUMN_BALL, un.getBalsOf());
-                values.put(DATAHelper.COLUMN_MONEY, 0);
+            for(ListForEge un : univer){
+                values.put(DATAHelper.COLUMN_UNIVERSITY, un.getUnivers());
+                values.put(DATAHelper.COLUMN_SPECIALITY, un.getSpecial());
+                values.put(DATAHelper.COLUMN_DISCIPLINE, un.getDisvipl());
+                values.put(DATAHelper.COLUMN_BALL, un.getBall());
+                values.put(DATAHelper.COLUMN_MONEY, un.getMoney());
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
             }
-
-            dialogFragment.dismiss();
         }
     }
 
@@ -333,6 +338,46 @@ public class MainActivity extends AppCompatActivity {
             dialogFragment.dismiss();
         }
     }
+    public List<StructClass> getJs(){
+        Gson gson = new Gson();
+        BufferedReader br;
+        List<StructClass> list;
+        List<StructClass> list2;
+        InputStream is = getResources().openRawResource(R.raw.msk);
+        Type founderListType = new TypeToken<ArrayList<StructClass>>(){}.getType();
+        br = new BufferedReader(new InputStreamReader(is));
+        list = gson.fromJson(br, founderListType);
+        is = getResources().openRawResource(R.raw.spb);
+        br = new BufferedReader(new InputStreamReader(is));
+        list2 = gson.fromJson(br, founderListType);
+        for(StructClass st : list2)
+            list.add(st);
+        list2.clear();
+        return list;
+    }
 
-
+    public ArrayList<ListForEge> getList(){
+        List<StructClass> list;
+        ArrayList<ListForEge> arrayList = new ArrayList<>();
+        list = getJs();
+        for(StructClass st : list){
+            for(MSClass ms : st.getPrograms()) {
+                String exa = "";
+                String s = "";
+                if(ms.getExams()!=null) {
+                    for (int j = 0; j < ms.getExams().getEge().size(); j++) {
+                        int i = 1;
+                        exa += ms.getExams().getEge().get(j);
+                        if (i < ms.getExams().getEge().size() - 1)
+                            exa += ", ";
+                        i++;
+                    }
+                }
+                else
+                    exa = "?";
+                arrayList.add(new ListForEge(st.getName(), exa, ms.getCommon_name(), ms.getScore(), (int) ms.getSalary()));
+            }
+        }
+        return arrayList;
+    }
 }
