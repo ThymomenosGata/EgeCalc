@@ -1,9 +1,12 @@
 package com.ilatis.egecalc.Fragments;
 
+import android.annotation.TargetApi;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +31,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -106,16 +111,22 @@ public class FragmentOfBalls extends Fragment {
 
         ArrayList<ListForEge> arrayZ = new ArrayList<>();
         int sum = 0;
-        for(ListForInterface list : listSS){
-            sum+=list.getBall();
-        }
 
         for(ListForEge ege : arrayList){
+            sum=getBalls(listSS,ege);
             if(ege.getBall() != 0 && ege.getBall() <= sum && search(listSS, ege)){
                 arrayZ.add(new ListForEge(ege.getUnivers(), ege.getDisvipl(),
                         ege.getSpecial(), ege.getBall(), ege.getMoney()));
             }
         }
+        Collections.sort(arrayZ, new Comparator<ListForEge>() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public int compare(ListForEge o1, ListForEge o2) {
+                return Integer.compare(o2.getBall(), o1.getBall());
+            }
+        });
         ListView listView = (ListView)v.findViewById(R.id.listForRait);
         adapter = new EgeAdapter(getContext(), arrayZ);
         listView.setAdapter(adapter);
@@ -145,21 +156,17 @@ public class FragmentOfBalls extends Fragment {
                 return false;
 
     }
-    public List<StructClass> getJs(){
-        Gson gson = new Gson();
-        BufferedReader br;
-        List<StructClass> list;
-        List<StructClass> list2;
-        InputStream is = getResources().openRawResource(R.raw.msk);
-        Type founderListType = new TypeToken<ArrayList<StructClass>>(){}.getType();
-        br = new BufferedReader(new InputStreamReader(is));
-        list = gson.fromJson(br, founderListType);
-        is = getResources().openRawResource(R.raw.spb);
-        br = new BufferedReader(new InputStreamReader(is));
-        list2 = gson.fromJson(br, founderListType);
-        for(StructClass st : list2)
-            list.add(st);
-        list2.clear();
-        return list;
+
+    public int getBalls(ArrayList<ListForInterface> ls, ListForEge list){
+        String[] supDisc = getDisc(list.getDisvipl());
+        int sum = 0;
+        for(ListForInterface l : ls){
+            for(String str : supDisc){
+                if(l.getDisc().equals(str)){
+                    sum+=l.getBall();
+                }
+            }
+        }
+        return sum;
     }
 }
