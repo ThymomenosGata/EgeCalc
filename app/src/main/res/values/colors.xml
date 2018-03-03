@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#1d1d1d</color>
     <color name="colorAccent">#00ffe1</color>
     <color name="bottomsColor">#2d2e31</color>
+    <color name="bottomsColor2">#272829</color>
     <color name="bottomsTextColor">#00c5fc</color>
     <color name="backgroun">#1e1f26</color>
     <color name="textColor">#ffffff</color>
+    <color name="textColorN">#bdbdbe</color>
     <color name="enterTextColor">#e228e6</color>
 </resources>

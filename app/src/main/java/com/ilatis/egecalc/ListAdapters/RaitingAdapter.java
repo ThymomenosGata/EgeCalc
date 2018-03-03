@@ -48,7 +48,7 @@ public class RaitingAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.raiting_list, parent, false);
+            view = inflater.inflate(R.layout.rait_list, parent, false);
         }
 
         ClassRaiting list = getRaiting(position);

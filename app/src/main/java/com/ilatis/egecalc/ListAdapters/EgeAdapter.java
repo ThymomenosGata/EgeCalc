@@ -48,7 +48,7 @@ public class EgeAdapter extends BaseAdapter {
         // используем созданные, но не используемые view
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.listview, parent, false);
+            view = inflater.inflate(R.layout.ball_list, parent, false);
         }
 
         ListForEge listVV = getListVV(position);
@@ -59,7 +59,6 @@ public class EgeAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.university)).setText(listVV.univers);
         ((TextView) view.findViewById(R.id.balls)).setText(String.valueOf(listVV.ball));
         ((TextView) view.findViewById(R.id.zp)).setText(String.valueOf(listVV.money));
-
         return view;
     }
 

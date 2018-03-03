@@ -128,6 +128,7 @@ public class FragmentOfBalls extends Fragment {
             }
         });
         ListView listView = (ListView)v.findViewById(R.id.listForRait);
+        listView.setVerticalScrollBarEnabled(false);
         adapter = new EgeAdapter(getContext(), arrayZ);
         listView.setAdapter(adapter);
 

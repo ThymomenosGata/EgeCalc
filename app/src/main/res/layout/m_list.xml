@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/cv"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp"
+            >
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/rus"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Drus"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/rusBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv1"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/math"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dmath"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/mathBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv2"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/obsh"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dobsh"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/obshBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv3"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/fiz"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dfiz"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/fizBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv4"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/ist"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dist"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/istBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv5"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dbio"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/bioBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv6"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/chem"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dchem"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/chemBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv7"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/lang"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dlang"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/langBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv8"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/ikt"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dikt"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/iktBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv9"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/geo"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dgeo"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/geoBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cv10"
+            android:layout_marginBottom="4dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="7dp"
+                android:background="@color/bottomsColor">
+
+
+                <TextView
+                    android:id="@+id/lit"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/textColor"
+                    android:text="@string/Dlit"
+                    android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/litBalls"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:textColor="@color/textColor"
+                    android:background="@color/backgroun"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</ScrollView>

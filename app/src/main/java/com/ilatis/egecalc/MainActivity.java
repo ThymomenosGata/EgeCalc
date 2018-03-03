@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
+        scroll.setVerticalScrollBarEnabled(false);
         sqlH = new DATAHelper(getBaseContext());
         eSQL = new EditHelper(getBaseContext());
         sqlR = new DataRait(getBaseContext());
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         final SQLiteDatabase rSql = sqlR.getWritableDatabase();
         final SQLiteDatabase sql = sqlH.getWritableDatabase();
-
         Cursor c = sql.query(
                 DATAHelper.TABLE_NAME,
                 null,
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
                 values.put(DATAHelper.COLUMN_MONEY, un.getMoney());
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
             }
+            dialogFragment.dismiss();
         }
     }
 

@@ -60,6 +60,7 @@ public class RaitingFragment extends Fragment {
         }
         r.close();
         ListView listView = (ListView)v.findViewById(R.id.raitingList);
+        listView.setVerticalScrollBarEnabled(false);
         adapter = new RaitingAdapter(getContext(), rait);
         listView.setAdapter(adapter);
 
