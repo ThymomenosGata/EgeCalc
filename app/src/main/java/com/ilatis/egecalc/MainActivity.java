@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("WrongViewCast")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         final SQLiteDatabase rSql = sqlR.getWritableDatabase();
         final SQLiteDatabase sql = sqlH.getWritableDatabase();
+
         Cursor c = sql.query(
                 DATAHelper.TABLE_NAME,
                 null,
@@ -368,11 +369,9 @@ public class MainActivity extends AppCompatActivity {
                 String s = "";
                 if(ms.getExams()!=null) {
                     for (int j = 0; j < ms.getExams().getEge().size(); j++) {
-                        int i = 1;
                         exa += ms.getExams().getEge().get(j);
-                        if (i < ms.getExams().getEge().size() - 1)
+                        if (j < ms.getExams().getEge().size() - 1)
                             exa += ", ";
-                        i++;
                     }
                 }
                 else
