@@ -20,20 +20,27 @@
         android:layout_marginLeft="16dp"/>
 
 
-    <Button
-        android:id="@+id/startSearch"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/getUniver"
         android:background="@color/bottomsColor2"
-        android:textColor="@color/bottomsTextColor"
-        android:gravity="center_horizontal|center"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:layout_weight="0.2"
-        android:focusable="true" />
+        android:layout_weight="0.2">
+        <Button
+            android:id="@+id/startSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/getUniver"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/bottomsTextColor"
+            android:gravity="center_horizontal|center"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            android:focusable="true"
+            android:elevation="8dp"
+            android:translationZ="4dp" />
+    </LinearLayout>
 </LinearLayout>

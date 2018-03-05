@@ -1,12 +1,16 @@
 package com.ilatis.egecalc.Fragments;
 
+import android.animation.Animator;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
@@ -32,6 +36,7 @@ public class RaitingFragment extends Fragment {
     DataRait sql;
     ArrayList<ClassRaiting> rait = new ArrayList<>();
     RaitingAdapter adapter;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,7 +68,6 @@ public class RaitingFragment extends Fragment {
         listView.setVerticalScrollBarEnabled(false);
         adapter = new RaitingAdapter(getContext(), rait);
         listView.setAdapter(adapter);
-
         return v;
     }
 }

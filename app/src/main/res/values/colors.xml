@@ -9,5 +9,6 @@
     <color name="backgroun">#1e1f26</color>
     <color name="textColor">#ffffff</color>
     <color name="textColorN">#bdbdbe</color>
+    <color name="lines">#7b7b7b</color>
     <color name="enterTextColor">#e228e6</color>
 </resources>

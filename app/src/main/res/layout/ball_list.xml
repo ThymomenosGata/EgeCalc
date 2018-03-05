@@ -20,15 +20,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:background="@color/backgroun">
+            android:background="@color/bottomsColor">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardElevation="8dp"
-                card_view:cardCornerRadius="8dp"
-                android:background="@color/bottomsColor"
-                android:layout_marginBottom="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -36,16 +29,11 @@
                     android:orientation="vertical"
                     android:background="@color/bottomsColor"
                     android:clickable="true"
-                    android:focusable="true">
-
-                    <TextView
-                        android:id="@+id/textViewInfo4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textColorN"
-                        android:background="@color/bottomsColor"
-                        android:textSize="15pt"
-                        android:text="@string/info5" />
+                    android:focusable="true"
+                    android:paddingTop="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp">
 
                     <TextView
                         android:id="@+id/university"
@@ -53,21 +41,13 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/bottomsTextColor"
                         android:textStyle="bold"
-                        android:textSize="20pt"
+                        android:textSize="25pt"
                         android:layout_margin="1dp"
                         android:background="@color/bottomsColor"
                         android:text="" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardElevation="8dp"
-                card_view:cardCornerRadius="8dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/bottomsColor">
                 <TextView
                     android:id="@+id/napr"
                     android:layout_width="match_parent"
@@ -76,66 +56,62 @@
                     android:textSize="20pt"
                     android:textStyle="bold"
                     android:background="@color/bottomsColor"
-                    android:text="" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardElevation="8dp"
-                card_view:cardCornerRadius="8dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/bottomsColor">
+                    android:text=""
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="16dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/bottomsColor">
+                    android:background="@color/backgroun"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="4dp">
 
-                    <TextView
-                        android:id="@+id/textViewInfo1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textColorN"
-                        android:background="@color/bottomsColor"
-                        android:textSize="15pt"
-                        android:text="@string/info1" />
-                    <TextView
-                        android:id="@+id/disciplins"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/textColor"
-                        android:background="@color/bottomsColor"
-                        android:layout_margin="1dp"
-                        android:textSize="20pt"
-                        android:text="" />
-
+                        <TextView
+                            android:id="@+id/textViewInfo1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColorN"
+                            android:background="@color/bottomsColor"
+                            android:textSize="15pt"
+                            android:text="@string/info1"/>
+                        <TextView
+                            android:id="@+id/disciplins"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/textColor"
+                            android:background="@color/bottomsColor"
+                            android:textSize="20pt"
+                            android:text=""/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#7b7b7b"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp" />
+
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/backgroun">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    card_view:cardElevation="8dp"
-                    card_view:cardCornerRadius="8dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="0.5dp"
-                    android:textAlignment="center">
+                android:background="@color/bottomsColor"
+                android:layout_marginTop="4dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@color/bottomsColor"
-                        android:textAlignment="center">
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="8dp">
 
                         <TextView
                             android:id="@+id/textViewInfo2"
@@ -145,8 +121,7 @@
                             android:textColor="@color/textColorN"
                             android:textAlignment="center"
                             android:background="@color/bottomsColor"
-                            android:layout_margin="1dp"
-                            android:textSize="17pt"
+                            android:textSize="15pt"
                             android:text="@string/info2" />
 
                         <TextView
@@ -163,21 +138,20 @@
                             android:textAlignment="center"/>
 
                     </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    card_view:cardElevation="8dp"
-                    card_view:cardCornerRadius="8dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="0.5dp">
+                    android:background="@color/lines"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="2dp"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:background="@color/bottomsColor">
+                        android:background="@color/bottomsColor"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="8dp">
 
                         <TextView
                             android:id="@+id/textViewInfo3"
@@ -186,7 +160,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/textColorN"
                             android:textAlignment="center"
-                            android:textSize="17pt"
+                            android:textSize="15pt"
                             android:text="@string/info3" />
 
                         <TextView
@@ -198,9 +172,8 @@
                             android:textColor="@color/textColor"
                             android:textAlignment="center"
                             android:textSize="20pt"
-                            android:text="" />
+                            android:text=""/>
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
 
             </LinearLayout>
         </LinearLayout>

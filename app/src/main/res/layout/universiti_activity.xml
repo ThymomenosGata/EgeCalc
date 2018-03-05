@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroun">
@@ -15,27 +16,45 @@
             android:orientation="horizontal"
             android:layout_marginTop="1dp"
             android:layout_weight="0.15"
-            android:background="@color/backgroun">
+            android:background="@color/backgroun"
+            tools:ignore="ExtraText">
 
-            <Button
-                android:id="@+id/butEkz"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:textColor="@color/bottomsTextColor"
                 android:background="@color/bottomsColor2"
-                android:text="@string/BTEkz" />
+                android:orientation="vertical"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/butEkz"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/bottomsTextColor"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/BTEkz"
+                    android:elevation="8dp"
+                    android:translationZ="4dp"/>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/butZP"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:textColor="@color/textColor"
                 android:background="@color/bottomsColor2"
-                android:text="@string/BTZP" />
+                android:orientation="vertical"
+                android:layout_margin="0.5dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/butZP"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/BTZP"
+                    android:elevation="8dp"
+                    android:translationZ="4dp"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
