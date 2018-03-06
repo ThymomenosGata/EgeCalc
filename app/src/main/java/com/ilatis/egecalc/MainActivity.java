@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 values.put(DATAHelper.COLUMN_SPECIALITY, un.getSpecial());
                 values.put(DATAHelper.COLUMN_DISCIPLINE, un.getDisvipl());
                 values.put(DATAHelper.COLUMN_BALL, un.getBall());
-                values.put(DATAHelper.COLUMN_MONEY, un.getMoney());
+                values.put(DATAHelper.COLUMN_MONEY, String.valueOf(un.getMoney()));
                 sql.insert(DATAHelper.TABLE_NAME, null, values);
             }
             dialogFragment.dismiss();
@@ -376,7 +376,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                     exa = "?";
-                arrayList.add(new ListForEge(st.getName(), exa, ms.getCommon_name(), ms.getScore(), (int) ms.getSalary()));
+                if(ms.getSalary() == 0)
+                    s = "?";
+                else
+                    s = String.valueOf((int)ms.getSalary());
+                arrayList.add(new ListForEge(st.getName(), exa, ms.getCommon_name(), ms.getScore(), s));
             }
         }
         return arrayList;

@@ -9,9 +9,9 @@ public class ListForEge {
     String disvipl;
     String special;
     int ball;
-    int money;
+    String money;
 
-    public ListForEge(String univers, String disvipl, String special, int ball, int money) {
+    public ListForEge(String univers, String disvipl, String special, int ball, String money) {
         this.univers = univers;
         this.disvipl = disvipl;
         this.special = special;
@@ -38,7 +38,7 @@ public class ListForEge {
         return ball;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 

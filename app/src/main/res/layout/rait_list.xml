@@ -30,7 +30,9 @@
                 android:textColor="@color/bottomsTextColor"
                 android:textAlignment="center"
                 android:text=""
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"/>
 
             <View
                 android:layout_width="match_parent"
@@ -55,14 +57,16 @@
                         android:layout_marginBottom="8dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/textColorN"
                             android:textAlignment="center"
                             android:textSize="10dp"
                             android:background="@color/bottomsColor"
-                            android:text="@string/infoproc" />
+                            android:text="@string/infoproc"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginLeft="2dp"/>
 
                         <TextView
                             android:id="@+id/raitProc"
@@ -92,7 +96,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginBottom="8dp">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@color/bottomsColor"

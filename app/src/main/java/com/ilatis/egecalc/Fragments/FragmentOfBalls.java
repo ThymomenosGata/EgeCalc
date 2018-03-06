@@ -105,7 +105,7 @@ public class FragmentOfBalls extends Fragment {
             do{
                 arrayList.add(new ListForEge(c.getString(univerIndex),
                         c.getString(discIndex), c.getString(specifIndex),
-                        c.getInt(ballsIndex), c.getInt(moneyIndex)));
+                        c.getInt(ballsIndex), c.getString(moneyIndex)));
             }while (c.moveToNext());
         }
 

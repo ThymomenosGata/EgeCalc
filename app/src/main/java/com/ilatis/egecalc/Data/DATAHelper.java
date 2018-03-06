@@ -22,11 +22,9 @@ public class DATAHelper extends SQLiteOpenHelper {
     public final static String COLUMN_MONEY = "money";
 
 
-    //Имя файла базы данных
     private static final String DATABASE_NAME = "Datas.db";
 
-    //Версия базы данных. При изменении схемы увеличить на единицу
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public DATAHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,19 +36,17 @@ public class DATAHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Строка для создания таблицы
         db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
                 + _ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_UNIVERSITY + " TEXT, "
                 + COLUMN_SPECIALITY + " TEXT, "
                 + COLUMN_DISCIPLINE + " TEXT, "
                 + COLUMN_BALL + " INTEGER, "
-                + COLUMN_MONEY + " INTEGER" + ")");
+                + COLUMN_MONEY + " TEXT" + ")");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Удаляем старую таблицу и создаём новую
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
