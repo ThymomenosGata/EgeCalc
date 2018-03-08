@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,8 @@ public class FragmentOfBalls extends Fragment {
     public FragmentOfBalls(){
     }
 
+    DialogFragment dialogFragment;
+
     public static FragmentOfBalls newInstace(){
         return new FragmentOfBalls();
     }
@@ -54,7 +57,7 @@ public class FragmentOfBalls extends Fragment {
     EditHelper eSQL;
     DATAHelper sqlH;
     EgeAdapter adapter;
-
+    ArrayList<ListForEge> arrayZ = new ArrayList<>();
 
     @Nullable
     @Override
@@ -109,7 +112,6 @@ public class FragmentOfBalls extends Fragment {
             }while (c.moveToNext());
         }
 
-        ArrayList<ListForEge> arrayZ = new ArrayList<>();
         int sum = 0;
 
         for(ListForEge ege : arrayList){
@@ -133,6 +135,15 @@ public class FragmentOfBalls extends Fragment {
         listView.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(arrayZ.size() == 0){
+            dialogFragment = new ErrorInfoDialog();
+            dialogFragment.show(getFragmentManager(), "infoBalls");
+        }
     }
 
     public static String[] getDisc(String input) {

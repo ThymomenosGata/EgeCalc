@@ -26,4 +26,13 @@
     <string name="Aldial">Идет загрузка новых данных..</string>
     <string name="infoproc">Средняя доля трудоустройства</string>
     <string name="infozp">Средняя зарплата выпускников</string>
+    <string name="infoNullBulls">Университетов с вашими баллами нет. Попробуйте в следующем году</string>
+    <string name="lableNullBulls">Внимание!</string>
+    <string name="minBullsR">Минимальный балл 34</string>
+    <string name="minBullsM">Минимальный балл 27</string>
+    <string name="minBullsO">Минимальный балл 40</string>
+    <string name="minBullsF">Минимальный балл 36</string>
+    <string name="minBullsI">Минимальный балл 29</string>
+    <string name="minBullsIn">Минимальный балл 22</string>
+    <string name="minBullsL">Минимальный балл 32</string>
 </resources>

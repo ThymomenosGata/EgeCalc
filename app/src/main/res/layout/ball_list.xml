@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/bottomsTextColor"
                         android:textStyle="bold"
-                        android:textSize="25pt"
+                        android:textSize="20dp"
                         android:layout_margin="1dp"
                         android:background="@color/bottomsColor"
                         android:text="" />
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColor"
-                    android:textSize="20pt"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     android:background="@color/bottomsColor"
                     android:text=""
@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/textColorN"
                             android:background="@color/bottomsColor"
-                            android:textSize="15pt"
+                            android:textSize="10dp"
                             android:text="@string/info1"/>
                         <TextView
                             android:id="@+id/disciplins"
@@ -85,7 +85,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/textColor"
                             android:background="@color/bottomsColor"
-                            android:textSize="20pt"
+                            android:textSize="15dp"
                             android:text=""/>
                 </LinearLayout>
 
@@ -121,7 +121,7 @@
                             android:textColor="@color/textColorN"
                             android:textAlignment="center"
                             android:background="@color/bottomsColor"
-                            android:textSize="15pt"
+                            android:textSize="10dp"
                             android:text="@string/info2" />
 
                         <TextView
@@ -133,7 +133,7 @@
                             android:textColor="@color/textColor"
                             android:background="@color/bottomsColor"
                             android:layout_margin="1dp"
-                            android:textSize="20pt"
+                            android:textSize="15dp"
                             android:text=""
                             android:textAlignment="center"/>
 
@@ -160,7 +160,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/textColorN"
                             android:textAlignment="center"
-                            android:textSize="15pt"
+                            android:textSize="10dp"
                             android:text="@string/info3" />
 
                         <TextView
@@ -171,7 +171,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/textColor"
                             android:textAlignment="center"
-                            android:textSize="20pt"
+                            android:textSize="15dp"
                             android:text=""/>
                     </LinearLayout>
 

@@ -41,6 +41,8 @@ public class RaitingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.raiting_fragment, container, false);
+
+
         sql = new DataRait(getContext());
         SQLiteDatabase sR = sql.getWritableDatabase();
 

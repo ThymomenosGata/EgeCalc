@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
         scroll.setVerticalScrollBarEnabled(false);
@@ -131,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         lit = (EditText)findViewById(R.id.litBalls);
 
 
+
         btn = (Button)findViewById(R.id.startSearch);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else
                         co++;
+
                 }
                 if(!math.getText().toString().equals("")){
                     if(Integer.parseInt(math.getText().toString()) <= 100) {
@@ -263,6 +268,245 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        rus.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!rus.getText().toString().equals("")){
+                    if(Integer.parseInt(rus.getText().toString()) <= 33) {
+                        rus.setError(getResources().getString(R.string.minBullsR));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        math.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!math.getText().toString().equals("")){
+                    if(Integer.parseInt(math.getText().toString()) <= 26) {
+                        math.setError(getResources().getString(R.string.minBullsM));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        obsh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!obsh.getText().toString().equals("")){
+                    if(Integer.parseInt(obsh.getText().toString()) <= 39) {
+                        obsh.setError(getResources().getString(R.string.minBullsO));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        fiz.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!fiz.getText().toString().equals("")){
+                    if(Integer.parseInt(fiz.getText().toString()) <= 35) {
+                        fiz.setError(getResources().getString(R.string.minBullsF));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        him.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!him.getText().toString().equals("")){
+                    if(Integer.parseInt(him.getText().toString()) <= 35) {
+                        him.setError(getResources().getString(R.string.minBullsF));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        bio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!bio.getText().toString().equals("")){
+                    if(Integer.parseInt(bio.getText().toString()) <= 35) {
+                        bio.setError(getResources().getString(R.string.minBullsF));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ist.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!ist.getText().toString().equals("")){
+                    if(Integer.parseInt(ist.getText().toString()) <= 28) {
+                        ist.setError(getResources().getString(R.string.minBullsI));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ikt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!ikt.getText().toString().equals("")){
+                    if(Integer.parseInt(ikt.getText().toString()) <= 39) {
+                        ikt.setError(getResources().getString(R.string.minBullsO));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        geo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!geo.getText().toString().equals("")){
+                    if(Integer.parseInt(geo.getText().toString()) <= 39) {
+                        geo.setError(getResources().getString(R.string.minBullsO));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        lang.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!lang.getText().toString().equals("")){
+                    if(Integer.parseInt(lang.getText().toString()) <= 21) {
+                        lang.setError(getResources().getString(R.string.minBullsIn));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        lit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!lit.getText().toString().equals("")){
+                    if(Integer.parseInt(lit.getText().toString()) <= 31) {
+                        lit.setError(getResources().getString(R.string.minBullsL));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
     }
 
     private void error(){
