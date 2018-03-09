@@ -66,12 +66,12 @@ public class UniversytisActivity extends AppCompatActivity {
         }
 
         if(i == 0){
-            btnEk.setTextColor(getColor(R.color.bottomsTextColor));
-            btnMn.setTextColor(getColor(R.color.textColor));
+            btnEk.setTextColor(getResources().getColor(R.color.bottomsTextColor));
+            btnMn.setTextColor(getResources().getColor(R.color.textColor));
             loadFragment(FragmentOfBalls.newInstace());
         }else{
-            btnEk.setTextColor(getColor(R.color.textColor));
-            btnMn.setTextColor(getColor(R.color.bottomsTextColor));
+            btnEk.setTextColor(getResources().getColor(R.color.textColor));
+            btnMn.setTextColor(getResources().getColor(R.color.bottomsTextColor));
             loadFragment(RaitingFragment.newInstace());
         }
 
@@ -98,8 +98,8 @@ public class UniversytisActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i = 0;
-                btnEk.setTextColor(getColor(R.color.bottomsTextColor));
-                btnMn.setTextColor(getColor(R.color.textColor));
+                btnEk.setTextColor(getResources().getColor(R.color.bottomsTextColor));
+                btnMn.setTextColor(getResources().getColor(R.color.textColor));
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_STATE, i);
                 editor.apply();
@@ -112,8 +112,8 @@ public class UniversytisActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i = 1;
-                btnEk.setTextColor(getColor(R.color.textColor));
-                btnMn.setTextColor(getColor(R.color.bottomsTextColor));
+                btnEk.setTextColor(getResources().getColor(R.color.textColor));
+                btnMn.setTextColor(getResources().getColor(R.color.bottomsTextColor));
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_STATE, i);
                 editor.apply();
