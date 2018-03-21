@@ -1,6 +1,5 @@
 package com.ilatis.egecalc.Fragments;
 
-import android.animation.Animator;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -10,7 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ListView;
 

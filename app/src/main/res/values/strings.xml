@@ -35,4 +35,5 @@
     <string name="minBullsI">Минимальный балл 29</string>
     <string name="minBullsIn">Минимальный балл 22</string>
     <string name="minBullsL">Минимальный балл 32</string>
+    <string name="title_activity_university">Список университетов</string>
 </resources>

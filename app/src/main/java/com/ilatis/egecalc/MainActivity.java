@@ -2,33 +2,28 @@ package com.ilatis.egecalc;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ScrollView;
+import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ilatis.egecalc.Data.DATAHelper;
 import com.ilatis.egecalc.Data.DataRait;
-import com.ilatis.egecalc.Data.EditHelper;
-import com.ilatis.egecalc.Data.ListForInterface;
 import com.ilatis.egecalc.Data.MSClass;
 import com.ilatis.egecalc.Data.StructClass;
 import com.ilatis.egecalc.Fragments.AlertDialogMain;
-import com.ilatis.egecalc.Fragments.ErrorDialog;
-import com.ilatis.egecalc.Fragments.ErrorDialogTwo;
+import com.ilatis.egecalc.Fragments.MainFragment;
+import com.ilatis.egecalc.Fragments.RaitingFragment;
 import com.ilatis.egecalc.ListAdapters.ListForEge;
 import com.ilatis.egecalc.Parser.HelperClasses.ClassRaiting;
 import com.ilatis.egecalc.Parser.ParseRaiting;
@@ -44,42 +39,32 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     DialogFragment dialogFragment;
-    private Button btn;
     DATAHelper sqlH;
-    EditHelper eSQL;
     DataRait sqlR;
-    private EditText rus;
-    private EditText math;
-    private EditText obsh;
-    private EditText ist;
-    private EditText him;
-    private EditText bio;
-    private EditText ikt;
-    private EditText geo;
-    private EditText lang;
-    private EditText lit;
-    private EditText fiz;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.containerss, fragment);
-        ft.commit();
-    }
-
-    ArrayList<ListForInterface> listV = new ArrayList<>();
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
-        scroll.setVerticalScrollBarEnabled(false);
+
+        setContentView(R.layout.new_activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        int rotate = getWindowManager().getDefaultDisplay().getRotation();
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
         sqlH = new DATAHelper(getBaseContext());
-        eSQL = new EditHelper(getBaseContext());
         sqlR = new DataRait(getBaseContext());
-        final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
         final SQLiteDatabase rSql = sqlR.getWritableDatabase();
         final SQLiteDatabase sql = sqlH.getWritableDatabase();
 
@@ -118,412 +103,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        if(r.moveToFirst()){
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            adapter.addFragment(new MainFragment(), "Побальный рейтинг");
+            adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
+            viewPager.setAdapter(adapter);
+        }
         c.close();
         r.close();
-
-        rus = (EditText)findViewById(R.id.rusBalls);
-        math = (EditText)findViewById(R.id.mathBalls);
-        obsh = (EditText)findViewById(R.id.obshBalls);
-        fiz = (EditText)findViewById(R.id.fizBalls);
-        him = (EditText)findViewById(R.id.chemBalls);
-        bio = (EditText)findViewById(R.id.bioBalls);
-        ist = (EditText)findViewById(R.id.istBalls);
-        ikt = (EditText)findViewById(R.id.iktBalls);
-        geo = (EditText)findViewById(R.id.geoBalls);
-        lang = (EditText)findViewById(R.id.langBalls);
-        lit = (EditText)findViewById(R.id.litBalls);
-
-
-
-        btn = (Button)findViewById(R.id.startSearch);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sqlE.delete(EditHelper.TABLE_NAME, null, null);
-                int co = 0;
-                int coc = 0;
-                if(!rus.getText().toString().equals("")){
-                    if(Integer.parseInt(rus.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("русский язык",
-                                Integer.parseInt(rus.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-
-                }
-                if(!math.getText().toString().equals("")){
-                    if(Integer.parseInt(math.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("математика",
-                                Integer.parseInt(math.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!obsh.getText().toString().equals("")){
-                    if(Integer.parseInt(obsh.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("обществознание",
-                                Integer.parseInt(obsh.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!fiz.getText().toString().equals("")){
-                    if(Integer.parseInt(fiz.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("физика",
-                                Integer.parseInt(fiz.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!him.getText().toString().equals("")){
-                    if(Integer.parseInt(him.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("химия",
-                                Integer.parseInt(him.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!bio.getText().toString().equals("")){
-                    if(Integer.parseInt(bio.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("биология",
-                                Integer.parseInt(bio.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!ist.getText().toString().equals("")){
-                    if(Integer.parseInt(ist.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("история",
-                                Integer.parseInt(ist.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!ikt.getText().toString().equals("")){
-                    if(Integer.parseInt(ikt.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("информатика и ИКТ",
-                                Integer.parseInt(ikt.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!geo.getText().toString().equals("")){
-                    if(Integer.parseInt(geo.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("география",
-                                Integer.parseInt(geo.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!lang.getText().toString().equals("")){
-                    if(Integer.parseInt(lang.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("иностранный язык",
-                                Integer.parseInt(lang.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-                }
-                if(!lit.getText().toString().equals("")){
-                    if( Integer.parseInt(lit.getText().toString()) <= 100) {
-                        listV.add(new ListForInterface("литература",
-                                Integer.parseInt(lit.getText().toString())));
-                        coc++;
-                    }
-                    else
-                        co++;
-
-                }
-
-                if(co == 0 && coc > 2) {
-                    ContentValues vs = new ContentValues();
-                    for (ListForInterface list : listV) {
-                        vs.put(EditHelper.COLUMN_DISC, list.getDisc());
-                        vs.put(EditHelper.COLUMN_BALLS, list.getBall());
-                        sqlE.insert(EditHelper.TABLE_NAME,
-                                null,
-                                vs);
-                    }
-                    listV.removeAll(listV);
-                    Intent intent = new Intent(MainActivity.this, UniversytisActivity.class);
-                    startActivity(intent);
-                }
-                else if (co != 0) {
-                    error();
-                    DialogFragment dialog = new ErrorDialog();
-                    dialog.show(getSupportFragmentManager(), "Error1");
-                }
-                else if(coc < 3){
-                    DialogFragment dialog = new ErrorDialogTwo();
-                    dialog.show(getSupportFragmentManager(), "Error2");
-                }
-            }
-        });
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        rus.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!rus.getText().toString().equals("")){
-                    if(Integer.parseInt(rus.getText().toString()) <= 33) {
-                        rus.setError(getResources().getString(R.string.minBullsR));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        math.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!math.getText().toString().equals("")){
-                    if(Integer.parseInt(math.getText().toString()) <= 26) {
-                        math.setError(getResources().getString(R.string.minBullsM));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        obsh.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!obsh.getText().toString().equals("")){
-                    if(Integer.parseInt(obsh.getText().toString()) <= 39) {
-                        obsh.setError(getResources().getString(R.string.minBullsO));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        fiz.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!fiz.getText().toString().equals("")){
-                    if(Integer.parseInt(fiz.getText().toString()) <= 35) {
-                        fiz.setError(getResources().getString(R.string.minBullsF));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        him.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!him.getText().toString().equals("")){
-                    if(Integer.parseInt(him.getText().toString()) <= 35) {
-                        him.setError(getResources().getString(R.string.minBullsF));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        bio.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!bio.getText().toString().equals("")){
-                    if(Integer.parseInt(bio.getText().toString()) <= 35) {
-                        bio.setError(getResources().getString(R.string.minBullsF));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        ist.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!ist.getText().toString().equals("")){
-                    if(Integer.parseInt(ist.getText().toString()) <= 28) {
-                        ist.setError(getResources().getString(R.string.minBullsI));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        ikt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!ikt.getText().toString().equals("")){
-                    if(Integer.parseInt(ikt.getText().toString()) <= 39) {
-                        ikt.setError(getResources().getString(R.string.minBullsO));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        geo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!geo.getText().toString().equals("")){
-                    if(Integer.parseInt(geo.getText().toString()) <= 39) {
-                        geo.setError(getResources().getString(R.string.minBullsO));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        lang.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!lang.getText().toString().equals("")){
-                    if(Integer.parseInt(lang.getText().toString()) <= 21) {
-                        lang.setError(getResources().getString(R.string.minBullsIn));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        lit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!lit.getText().toString().equals("")){
-                    if(Integer.parseInt(lit.getText().toString()) <= 31) {
-                        lit.setError(getResources().getString(R.string.minBullsL));
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-
-    }
-
-    private void error(){
-        eSQL = new EditHelper(getBaseContext());
-        SQLiteDatabase sqlE = eSQL.getWritableDatabase();
-        sqlE.delete(EditHelper.TABLE_NAME, null, null);
-        rus.setText("");
-        math.setText("");
-        obsh.setText("");
-        bio.setText("");
-        him.setText("");
-        geo.setText("");
-        fiz.setText("");
-        ikt.setText("");
-        ist.setText("");
-        lang.setText("");
-        lit.setText("");
     }
 
     private class MyTask extends AsyncTask<Void, ArrayList<ListForEge>, ArrayList<ListForEge>> {
@@ -583,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
                 sR.insert(DataRait.TABLE_NAME, null, val);
             }
             dialogFragment.dismiss();
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            adapter.addFragment(new MainFragment(), "Побальный рейтинг");
+            adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
+            viewPager.setAdapter(adapter);
         }
     }
     public List<StructClass> getJs(){
@@ -628,5 +219,52 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return arrayList;
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MainFragment(), "Побальный рейтинг");
+        adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MainFragment(), "Побальный рейтинг");
+        adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
+        viewPager.setAdapter(adapter);
     }
 }
