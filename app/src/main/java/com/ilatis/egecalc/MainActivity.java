@@ -51,14 +51,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.new_activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        int rotate = getWindowManager().getDefaultDisplay().getRotation();
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        getScreen(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -103,12 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if(r.moveToFirst()){
-            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-            adapter.addFragment(new MainFragment(), "Побальный рейтинг");
-            adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
-            viewPager.setAdapter(adapter);
-        }
         c.close();
         r.close();
     }
@@ -248,20 +240,10 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MainFragment(), "Побальный рейтинг");
-        adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
-        viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void getScreen(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MainFragment(), "Побальный рейтинг");
         adapter.addFragment(new RaitingFragment(), "Рейтинг зарплат");
