@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,8 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
-import com.ilatis.egecalc.Data.DATAHelper;
-import com.ilatis.egecalc.Data.DataRait;
 import com.ilatis.egecalc.Data.EditHelper;
 import com.ilatis.egecalc.Data.ListForInterface;
 import com.ilatis.egecalc.R;
@@ -32,9 +29,7 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment {
 
     private Button btn;
-    DATAHelper sqlH;
     EditHelper eSQL;
-    DataRait sqlR;
     private EditText rus;
     private EditText math;
     private EditText obsh;
@@ -47,7 +42,6 @@ public class MainFragment extends Fragment {
     private EditText lit;
     private EditText fiz;
     private View v;
-    private ViewPager viewPager;
     ArrayList<ListForInterface> listV = new ArrayList<>();
 
     public MainFragment(){
@@ -64,13 +58,8 @@ public class MainFragment extends Fragment {
         v = inflater.inflate(R.layout.activity_main, container, false);
         ScrollView scroll = (ScrollView)v.findViewById(R.id.scroll);
         scroll.setVerticalScrollBarEnabled(false);
-        sqlH = new DATAHelper(getContext());
         eSQL = new EditHelper(getContext());
-        sqlR = new DataRait(getContext());
         final SQLiteDatabase sqlE = eSQL.getWritableDatabase();
-        final SQLiteDatabase rSql = sqlR.getWritableDatabase();
-        final SQLiteDatabase sql = sqlH.getWritableDatabase();
-        viewPager = (ViewPager) v.findViewById(R.id.viewpager);
 
         rus = (EditText)v.findViewById(R.id.rusBalls);
         math = (EditText)v.findViewById(R.id.mathBalls);

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.ilatis.egecalc.Parser.HelperClasses.ClassRaiting;
+import com.ilatis.egecalc.Data.ClassRaiting;
 import com.ilatis.egecalc.R;
 
 import java.util.ArrayList;
